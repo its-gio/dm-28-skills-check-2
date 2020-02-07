@@ -2,7 +2,8 @@ function getProducts(req, res) {
   const db = req.app.get("db");
 
   db.get_inventory()
-    .then(inventory => res.status(200).json(inventory));
+    .then((inventory) => res.status(200).json(inventory))
+    .catch(err => console.error(err));
 }
 
 function addProduct(req, res) {
