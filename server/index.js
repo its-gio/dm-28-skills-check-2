@@ -11,6 +11,6 @@ massive(CONECTION_STRING)
 
 app
   .use(express.json())
-  // .get('/api/products', getProducts)
+  .get('/api/inventory', getProducts)
 
 app.listen(SERVER_PORT, () => console.log(`It's over ${SERVER_PORT}!`));
