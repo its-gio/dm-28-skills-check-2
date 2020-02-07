@@ -16,6 +16,7 @@ export default class Form extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleClear = this.handleClear.bind(this);
     this.postItem = this.postItem.bind(this);
+    this.postEdits = this.postEdits.bind(this);
   }
 
   componentDidUpdate(prevProps) {
@@ -33,6 +34,15 @@ export default class Form extends Component {
       .then(() => this.props.getNewItems())
       .catch(err => console.error(err));
       this.handleClear(e);
+  }
+
+  postEdits(e) {
+    e.preventDefault();
+    Axios
+      .put(`/api/inventory/${this.props.currentProd.product_id}`, this.state)
+      .then(() => this.props.getNewItems())
+      .catch(err => console.error(err));
+    this.handleClear(e);
   }
 
   handleChange(e) {
@@ -53,7 +63,7 @@ export default class Form extends Component {
         <button onClick={this.handleClear}>Cancel</button>
         {
           this.state.edit ?
-          <button onClick={this.postItem}>Save Changes</button> :
+          <button onClick={this.postEdits}>Save Changes</button> :
           <button onClick={this.postItem}>Add to Inventory</button>
         }
       </form>
