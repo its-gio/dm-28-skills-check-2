@@ -15,6 +15,7 @@ export default class Product extends Component {
       .catch(err => console.error(err));
   }
 
+  
 
   render() {
     return (
@@ -23,7 +24,7 @@ export default class Product extends Component {
         <h1>{this.props.product.name}</h1>
         <p>${this.props.product.price}</p>
         <button onClick={this.handleDelete}>Delete</button>
-        <button>Edit</button>
+        <button onClick={() => this.props.selectItem(this.props.product)}>Edit</button>
       </div>
     )
   }

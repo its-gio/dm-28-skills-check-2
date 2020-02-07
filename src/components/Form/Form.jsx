@@ -9,12 +9,21 @@ export default class Form extends Component {
     this.state = {
       img_url: "",
       name: "",
-      price: ""
+      price: "",
+      edit: false
     }
 
     this.handleChange = this.handleChange.bind(this);
     this.handleClear = this.handleClear.bind(this);
     this.postItem = this.postItem.bind(this);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.currentProd !== this.props.currentProd) {
+      const { img_url, name, price } = this.props.currentProd
+      // console.log(prevProps.currentProd, this.props.currentProd)
+      this.setState({ img_url, name, price, edit: true });
+    }
   }
 
   postItem(e) {
@@ -32,7 +41,7 @@ export default class Form extends Component {
 
   handleClear(e) {
     e.preventDefault();
-    this.setState({ img_url: "", name: "", price: "" })
+    this.setState({ img_url: "", name: "", price: "", edit: false })
   }
 
   render() {
@@ -42,7 +51,11 @@ export default class Form extends Component {
         <input onChange={this.handleChange} placeholder="Item Name" value={this.state.name} name="name" type="text"/>
         <input onChange={this.handleChange} placeholder="Item Price" value={this.state.price} name="price" type="number"/>
         <button onClick={this.handleClear}>Cancel</button>
-        <button onClick={this.postItem}>Add to Inventory</button>
+        {
+          this.state.edit ?
+          <button onClick={this.postItem}>Save Changes</button> :
+          <button onClick={this.postItem}>Add to Inventory</button>
+        }
       </form>
     )
   }

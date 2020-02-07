@@ -10,10 +10,12 @@ class App extends React.Component {
     super();
 
     this.state = {
-      products: []
+      products: [],
+      currentProd: null
     }
 
     this.getNewItems = this.getNewItems.bind(this);
+    this.selectItem = this.selectItem.bind(this);
   }
 
   componentDidMount() {
@@ -30,12 +32,16 @@ class App extends React.Component {
     .catch(err => console.error(err));
   }
 
+  selectItem(currentProd) {
+    this.setState({ currentProd })
+  }
+
   render() {
     return (
       <div className="App">
         <Header />
-        <Dashboard getNewItems={this.getNewItems} products={this.state.products} />
-        <Form getNewItems={this.getNewItems}  />
+        <Dashboard selectItem={this.selectItem} getNewItems={this.getNewItems} products={this.state.products} />
+        <Form currentProd={this.state.currentProd} getNewItems={this.getNewItems}  />
       </div>
     );
   }
