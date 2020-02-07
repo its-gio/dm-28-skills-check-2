@@ -4,6 +4,7 @@ import Header from './components/Header/Header';
 import Dashboard from './components/Dashboard/Dashboard';
 import Form from './components/Form/Form';
 import Axios from 'axios';
+import { HashRouter as Router, Route, Switch } from "react-router-dom"
 
 class App extends React.Component {
   constructor() {
@@ -38,11 +39,17 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="App">
-        <Header />
-        <Dashboard selectItem={this.selectItem} getNewItems={this.getNewItems} products={this.state.products} />
-        <Form currentProd={this.state.currentProd} getNewItems={this.getNewItems}  />
-      </div>
+      <Router>
+        <div className="App">
+          <Header />
+          <Switch>
+            <Route path="/" exact render={(props) => <Dashboard {...props} selectItem={this.selectItem} getNewItems={this.getNewItems} products={this.state.products} />} />
+            <Route path="/addProduct" render={(props) => <Form {...props} currentProd={this.state.currentProd} getNewItems={this.getNewItems} />} />
+          </Switch>
+          {/* <Dashboard selectItem={this.selectItem} getNewItems={this.getNewItems} products={this.state.products} /> */}
+          {/* <Form currentProd={this.state.currentProd} getNewItems={this.getNewItems}  /> */}
+        </div>
+      </Router>
     );
   }
 }
