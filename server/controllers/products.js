@@ -25,7 +25,13 @@ function deleteProduct(req, res) {
 }
 
 function editProduct(req, res) {
+  const { img_url, name, price } = req.body;
+  const { id } = req.params;
+  const db = req.app.get("db");
 
+  db.update_product(id, img_url, name, price)
+    .then(() => res.sendStatus(200))
+    .catch(err => console.error(err));
 }
 
 module.exports = {
