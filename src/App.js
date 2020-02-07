@@ -34,7 +34,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <Header />
-        <Dashboard products={this.state.products} />
+        <Dashboard getNewItems={this.getNewItems} products={this.state.products} />
         <Form getNewItems={this.getNewItems}  />
       </div>
     );
