@@ -13,5 +13,6 @@ app
   .use(express.json())
   .get('/api/inventory', getProducts)
   .post('/api/inventory', addProduct)
+  .delete('/api/inventory/:id', deleteProduct)
 
 app.listen(SERVER_PORT, () => console.log(`It's over ${SERVER_PORT}!`));

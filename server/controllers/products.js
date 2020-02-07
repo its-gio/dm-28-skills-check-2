@@ -16,7 +16,12 @@ function addProduct(req, res) {
 }
 
 function deleteProduct(req, res) {
+  const { id } = req.params;
+  const db = req.app.get("db");
 
+  db.delete_product(id)
+    .then(() => res.sendStatus(200))
+    .catch(err => console.error(err));
 }
 
 function editProduct(req, res) {
