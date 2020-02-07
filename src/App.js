@@ -20,10 +20,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    Axios
-      .get("/api/inventory")
-      .then(res => this.setState({ products: res.data }))
-      .catch(err => console.error(err));
+    this.getNewItems()
   }
 
   getNewItems() {
@@ -45,6 +42,7 @@ class App extends React.Component {
           <Switch>
             <Route path="/" exact render={(props) => <Dashboard {...props} selectItem={this.selectItem} getNewItems={this.getNewItems} products={this.state.products} />} />
             <Route path="/addProduct" render={(props) => <Form {...props} currentProd={this.state.currentProd} getNewItems={this.getNewItems} />} />
+            <Route path="/edit/:id" render={(props) => <Form {...props} currentProd={this.state.currentProd} getNewItems={this.getNewItems} />} />
           </Switch>
           {/* <Dashboard selectItem={this.selectItem} getNewItems={this.getNewItems} products={this.state.products} /> */}
           {/* <Form currentProd={this.state.currentProd} getNewItems={this.getNewItems}  /> */}

@@ -33,7 +33,7 @@ export default class Form extends Component {
       .post("/api/inventory", this.state)
       .then(() => this.props.getNewItems())
       .catch(err => console.error(err));
-      this.handleClear(e);
+    this.handleClear(e);
   }
 
   postEdits(e) {

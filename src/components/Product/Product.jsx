@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Axios from 'axios';
+import { Link } from "react-router-dom"
 
 export default class Product extends Component {
   constructor() {
@@ -24,8 +25,9 @@ export default class Product extends Component {
         <h1>{this.props.product.name}</h1>
         <p>${this.props.product.price}</p>
         <button onClick={this.handleDelete}>Delete</button>
-        <button onClick={() => this.props.selectItem(this.props.product)}>Edit</button>
+        <Link to={`/edit/${this.props.product.product_id}`}><button>Edit</button></Link>
       </div>
     )
   }
 }
+// onClick={() => this.props.selectItem(this.props.product)}
