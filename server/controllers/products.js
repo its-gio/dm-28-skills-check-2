@@ -7,7 +7,12 @@ function getProducts(req, res) {
 }
 
 function addProduct(req, res) {
+  const db = req.app.get("db");
+  const { name, price, img_url } = req.body
 
+  db.create_product(name, price, img_url)
+    .then(() => res.sendStatus(200))
+    .catch(err => console.error(err));
 }
 
 function deleteProduct(req, res) {
